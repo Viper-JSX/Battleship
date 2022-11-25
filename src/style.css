@@ -1,0 +1,922 @@
+:root{
+	--lightColor: #FFFFFF;
+	--darkColor: #000000;
+	--highlightedColor: orange;
+
+	--lightBackground: #FFFFFF;
+	--deepDarkBackground: #111111;
+	--darkBackground: #222222;
+
+	--transparentLightBackground: rgba(255, 255, 255, 0.3)
+	--transparentDarkBackground: rgba(0, 0, 0, 0.3);
+
+	--lightBorder: 2px solid white;
+	--darkBorder: 2px solid #000000;
+
+	--cellBackground: #2C75FF;
+
+	--fontFamily: monospace, sans-serf;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--darkBackground);
+	font-family: var(--fontFamily);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+
+button{
+	margin: 0.15rem;
+	color: var(--lightColor);
+	background-color: var(--deepDarkBackground);
+	border-radius: 0.2rem;
+	transition: 0.3s;
+}
+
+button:hover{
+	color: var(--darkColor);
+	background-color: var(--lightBackground);
+}
+
+.closeButton{
+	width: max-content;
+	aspect-ratio: 1/1;
+	padding: 0.1rem;
+	color: white;
+	background: red;
+	text-align: center;
+	border: var(--darkBorder);
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.closeButton:hover{
+	background-color: var(--highlightedColor);
+}
+
+
+#game{
+	width: 100%;
+	height: 100%;
+	background: rgba(50, 50, 50, 0.4);
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#mainMenu{
+	opacity: 0.5;
+	width: 100%;
+	height: 100%;
+	transition: 2s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+#mainMenuVideo{
+	min-width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	transition: 2s;
+	z-index: -1;
+}
+
+#playButton{
+	width: 5em;
+	height: 3em;
+	font-size: 1.2em;
+	font-weight: 700;
+	font-family: monospace;
+}
+
+#playButton > span{
+	animation-name: playButtonAnimation;
+	animation-iteration-count: infinite;
+	animation-duration: 1000ms;
+}
+
+#playButton :nth-child(1){
+	animation-delay: 1000ms;
+}
+
+#playButton :nth-child(2){
+	animation-delay: 1200ms;
+}
+
+#playButton :nth-child(3){
+	animation-delay: 1400ms;
+}
+
+#playButton :nth-child(4){
+	animation-delay: 1600ms;
+}
+
+#configWindow{
+	width: 0%;
+	height: 100%;
+	background: var(--darkBackground);
+	display: none;
+	transition: 1s;
+	position: absolute;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+#configWindow > button{
+	width: 5rem;
+	height: 2rem;
+}
+
+#configurationsButton{
+	width: 3em;
+	height: 3em;
+	background: black;
+}
+
+#configurationsButton > img{
+	width: 100%;
+	height: 100%;
+	transition: 1s;
+}
+
+#configurationsButton:hover > img{
+	transform: rotate(90deg);
+}
+
+#closeConfigurationWindow{
+	top: 0;
+	right: 0;
+	position: absolute;
+}
+
+#configWindow > button{
+	margin: 20px;
+}
+
+#selectGameModeMenu{
+	width: 0%;
+	height: 100%;
+	position: relative;
+	transition: 2s;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#selectGameModeBackgroundVideo{
+	min-width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	transition: 2s;
+	z-index: -1;
+}
+
+#nameWindow{
+	width: 100%;
+	height: 100%;
+	background: black;
+	color: white;
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	z-index: 1;
+}
+
+#openPlayerInfoWindow{
+	width: 10vw;
+	height: 15vw;
+	color: white;
+	background: rgba(10, 10, 10, 0.3);
+	border: 1px solid black;
+	border-radius: 0.5rem;
+	position: absolute;
+	top: 0;
+	right: 0;
+	transition: 0.3s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#openPlayerInfoWindow:hover{
+	border-color: var(--lightColor);
+	border-width: 0.5rem;
+}
+
+#playerInfoWindow{
+	width: 100%;
+	height: 100%;
+	color: white;
+	background: black;
+	position: absolute;
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	z-index: 2;
+}
+
+#closePlayerInfoWindow{
+	top: 0;
+	right: 0;
+	position: absolute;
+}
+
+.playerInfoFrame{
+	width: 10%;
+	aspect-ratio: 1/1;
+	position: static;
+	background: rgba(10, 10, 10, 0.3);
+	border: 1px solid black;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+#playerInfoWindow > .playerInfoFrame #playerIcon:before{
+	content: "1";
+	color: red;
+	position: absolute;
+	top: 0;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+
+.playerInfoFrame > .playerName{
+	position: relative;
+}
+
+.playerIconFrame{
+	width: 100%;
+	margin: 0.3rem;
+}
+
+.playerIcon{
+	width: 100%;
+	transition: 0.3s;
+}
+
+#playerIcon:hover{
+	transform: scale(1.1);
+}
+
+.playerName{
+	text-align: center;
+}
+
+#playerLevelIndicator{
+	width: 90%;
+	height: 30%;
+	min-width: max-content;
+	min-height: max-content;
+	background-color: var(--darkBackground);
+	border: var(--lightBorder);
+	border-radius: 1rem;
+	overflow: hidden;
+	position: relative;
+	bottom: 0;
+}
+
+#playerLevelIndicatorFill{
+	width: 0%;
+	height: 100%;
+	background: green;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.playerEXPoints{
+	width: 100%;
+	min-width: max-content;
+	color: var(--lightColor);
+	text-align: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+.playerLevelCount{
+	margin: 0.3rem;
+	border-left: var(--lightBorder);
+	border-right: var(--lightBorder);
+	border-radius: 0.3rem;
+}
+
+#achievementViewer{
+	top: 50%;
+	width: 30vw;
+	height: 15vw;
+	background: #222222;
+	border: 0.3rem solid black;
+	border-radius: 0.5rem;
+	position: absolute;
+	transform: translateY(-50%);
+	display: none;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	z-index: 1;
+}
+
+#closeAchievementViewer{
+	top: 0;
+	right: 0;
+	position: absolute;
+}
+
+.achievementCompletionIndicator{
+	width: 50%;
+	height: 10%;
+	background: rgba(30, 30, 30, 0.5);
+	border: 1px solid black;
+	border-radius: 1rem;
+	overflow: hidden;
+}
+
+.achievementCompletionIndicatorFill{
+	width: 0%;
+	height: 100%;
+	background: green;
+	transition: 1s;
+	transition-timing-function: ease-out;
+}
+
+.achievementCompletionIndicatorText{
+
+}
+
+.achievementsTitle{
+	margin-top: 0.5rem;
+}
+
+#playerAchievements{
+	width: 70%;
+	height: 40%;
+	margin: 0.5rem;
+	background: var(--lightBackground);
+	overflow-y: auto;
+	scrollbar-width: thin;
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+
+
+.achievement{
+	width: 18%;
+	min-width: 5rem;
+	aspect-ratio: 1/1;
+	margin: 0.1rem;
+	background: #2C75FF;
+	border: var(--darkBorder);
+	transition: 0.1s;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	flex-grow: 1;
+}
+
+.achievement:hover{
+	opacity: 0.8;
+	transform: scale(1.1);
+}
+
+.achievement .achievementTitle{
+	text-align: center;
+}
+
+.achievement .achievementTarget{
+	color: var(--lightColor);
+	border-top: 0.1rem solid black;
+	border-bottom: 0.1rem solid white;
+	border-radius: 0.3rem;
+	text-align: center;
+	font-family: monospace;
+}
+
+#playerAchievements > p{
+	flex: 100%;
+}
+
+#backToMainMenuButton, #playerVsComputer, #playerVsPlayer, #selectGameMode{
+	color: var(--lightColor);
+	background-color: var(--transparentDarkBackground);
+	border-color: var(--lightColor);
+	transition: 0.1s;
+	font-weight: 600;
+	word-break: keep-all;
+}
+
+#backToMainMenuButton:hover, #playerVsComputer:hover, #playerVsPlayer:hover, #selectGameMode:hover{
+	background-color: var(--deepDarkBackground);
+	transform: scale(1.1);
+}
+
+#backToMainMenuButton{
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+#playerVsComputer, #playerVsPlayer{
+	width: 15vw;
+	height: 40px;
+	margin: 1rem;
+	padding: 0.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#playerVsComputer:disabled, #playerVsPlayer:disabled{
+	color: var(--highlightedColor);
+}
+
+#selectGameMode{
+	padding: 0.1rem;
+	right: 10px;
+	bottom: 10px;
+	position: absolute;
+}
+
+#configurationsButton{
+	right: 10px;
+	bottom: 10px;
+	position: absolute;
+}
+
+#selectGameModeMenu{
+	display: none;
+}
+
+#gameFields{
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: relative;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#newAchievementNotification{
+	width: 30vw;
+	height: 15vw;
+	min-width: 320px;
+	min-height: 160px;
+	color: var(--lightColor);
+	background: var(--deepDarkBackground);
+	text-align: center;
+	border: 3px solid black;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: 1.5s;
+	display: none;
+	flex-direction: column;
+	justify-content: space-around;
+	z-index: 3;
+}
+
+#firstPlayerField, #secondPlayerField{
+	width: 45vw;
+	height: 45vw;
+	min-width: 300px;
+	min-height: 300px;
+	/*height: 100%;*/
+	aspect-ratio: 1/1;
+	border: 2px solid black;
+	text-align: center;
+	font-size: 2vw;
+	display: grid;
+	grid-template-columns: repeat(11, 1fr);
+	grid-template-rows: repeat(11, 1fr);
+}
+
+#firstPlayerField > :not(.cell), #secondPlayerField > :not(.cell){
+	color: var(--lightBackground);
+	background: #333333;
+	border: 1px solid white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#secondPlayerField{
+	display: none;
+}
+
+#openWeaponSelectField{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	line-height: 33%;
+	display: none;
+}
+
+
+.cell{
+	background-color: var(--cellBackground);
+	border: var(--lightBorder);
+	border-width: 1px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cell > div{
+	z-index: 0;
+}
+
+.smoke{
+	width: 150%; 
+	height: 150%;
+	position: absolute;
+	z-index: 1;
+}
+
+.cell[shipDestroyed="true"]{
+	background-color: red;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+}
+
+#missDot{
+	width: 50%;
+	height: 50%;
+	background: white;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation-duration: 0.4s;
+	animation-iteration-count: 2;
+	animation-direction: alternate;
+	animation-timing-function: linear;
+}
+
+.destroyDot{
+	width: 50%;
+	height: 50%;
+	background-color: red;
+	border-radius: 50%;
+	animation-duration: 0.4s;
+	animation-iteration-count: 2;
+	animation-direction: alternate;
+	animation-timing-function: linear;
+}
+
+#shipPlaceField{
+	width: 30%;
+	height: 100%;
+	background: #222222;
+	color: white;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#shipsContainer{
+	border: var(--lightBorder);
+	box-shadow: 5px 5px 3px 3px black;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#shipsContainer > .ship{
+	margin: 10px;
+}
+
+#shipsContainer > .ship > .shipSection{
+	transition: 0.1s;
+}
+
+#shipsContainer > .ship:hover > .shipSection{
+	border: var(--darkBorder);
+	background-color: var(--lightBackground);
+}
+
+.ship.-selected > .shipSection{
+	background-color: orangered;	
+}
+
+#shipsContainer > .ship.-selected:hover .shipSection{
+	background-color: orangered;
+	border: 1px solid white;
+}
+
+.ship.-disabled > .shipSection{
+	background-color: gray;	
+}
+
+#shipsContainer > .ship.-disabled:hover .shipSection{
+	background-color: gray;
+	border: 1px solid white;
+}
+
+.shipSection{
+	width: 2vw;
+	height: 2vw;
+	background: black;
+	border: 1px solid white;
+}
+
+#startGameButton{
+	display: none;
+}
+
+.shipPlaceFieldControllButtons{
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.shipPlaceFieldControllButtons > button{
+	width: 100%;
+	margin: 0.3rem;
+}
+
+#gameDialog{
+	width: 80%;
+	border: var(--lightBorder);
+	text-align: center;
+}
+
+#weaponShop{
+	width: 100%;
+	height: 100%;
+	background: #222222;
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.weaponShopWeapon{
+	margin: 1rem
+}
+
+.weaponShopWeapon > div{
+	color: #AAAAAA;
+	text-align: center;
+	border-bottom: var(--lightBorder);
+	cursor: pointer;
+}
+
+.weaponShopWeapon > div:first-child{
+	border-top: var(--lightBorder);	
+}
+
+
+
+.weaponShopWeapon > div.-disabled{
+	color: orangered;
+}
+
+.weaponShopWeapon > div:hover{
+	color: var(--highlightedColor);
+}
+
+#openWeaponShop{
+
+}
+
+#openWeaponShop:hover{
+	/*set animation*/
+}
+
+#closeWeaponShop{
+	margin-left: 100%;
+	transform: translateX(-100%);
+	cursor: pointer;
+}
+
+#weaponSelectField{
+	width: 0%;
+	height: 100%;
+	min-height: 160px;
+	background: rgba(10, 10, 10, 0.95);
+	position: absolute;
+	left: 0;
+	transition: 0.3s;
+	overflow: hidden;
+	z-index: 2;
+}
+
+.weaponToSelectContainer{
+	text-align: center
+}
+
+.weaponToSelectContainer > div{
+	margin: 0.5rem;
+	border-top: var(--lightBorder);
+	cursor: pointer;
+}
+
+.weaponToSelectContainer > div.-selected {
+	color: orangered !important;
+}
+
+.weaponToSelectContainer > div.-disabled, .weaponToSelectContainer > div.-disabled:hover {
+	color: gray;
+}
+
+.weaponToSelectContainer > div:hover{
+	color: var(--highlightedColor);
+}
+
+#weaponSelectField > #closeWeaponSelectField{
+
+}
+
+#weaponSelectField > div{
+	color: white;
+}
+
+#weaponSelectField > div[amount="0"]{
+	color: red;
+}
+
+#selectShotPoint{
+	width: 100%;
+	height: 0%;
+	margin-top: 1rem;
+	background-color: var(--transparentLightBackground);
+	border: var(--lightBorder);
+	transition: 500ms;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.acceptWeaponShotPointButton{
+	width: 100%;
+}
+
+#leaveGameButton{
+	bottom: 0;
+	right: 0;
+	position: absolute;
+
+}
+
+#leavingConfirmWindow{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(100, 100, 100, 0.5);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;	
+}
+
+#leavingConfirmWindow button{
+	width: 5rem;
+	height: 2rem;
+}
+
+#gameEndWindow{
+	width: 100%;
+	height: 100%;
+	min-width: 320px;
+	min-height: 160px;
+	color: white;
+	background: rgba(70, 70, 70, 0.9);
+	font-size: 2em;
+	position: absolute;
+	transition: 0.5s;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+}
+
+#gameTotals{
+	width: 60%;
+	height: 50%;
+	font-size: 1rem;
+	border: 0.3rem solid black;
+	text-align: left;
+	overflow: auto;
+}
+
+#gameTotals *{
+	border: 0.15rem solid black;
+}
+
+#gameTotals :nth-child(1) > th{
+	text-align: center;
+}
+
+#gameTotals td{
+	text-align: center;
+}
+
+#endTheGameButton{
+	width: 5rem;
+	height: 3rem;
+	color: white;
+	background: #222222;
+	border-radius: 0px;
+	display: block;
+	font-size: 1.2rem;
+}
+
+
+
+/*____________________ANIMATIONS______________________*/
+
+@keyframes dotDestroy{
+	0%{
+		background: red;
+		box-shadow: 0px 0px 0px 0px orange;
+	}
+	100%{
+		background: orange;
+		box-shadow: 0px 0px 10px 10px orange;
+	}
+}
+
+@keyframes dotMiss{
+	0%{
+		background: white;
+		box-shadow: 0px 0px 0px 0px rgb(107, 197, 198);
+	}
+	100%{
+		background: aqua;
+		box-shadow: 0px 0px 10px 10px rgb(107, 197, 198)/*rgb(107, 197, 18)*/;
+	}
+}
+
+@keyframes fullShipExplosion{
+	0%{
+		background: red;
+		box-shadow: 0px 0px 0px 0px orange;
+	}
+	50%{
+		background: orange;
+		box-shadow: 0px 0px 10px 10px orange;
+		box-shadow:	0px 0px 20px 20ps orange;
+	}
+	100%{
+		background: pink;
+		box-shadow: none;
+	}
+}
+
+@keyframes playButtonAnimation{
+	0%{
+		color: white;
+	}
+	100%{
+		color: gray;
+	}
+}
+
+
+/*Media_Queries*/
+
+
+@media screen and (max-width: 620px){
+	#game{
+		height: 100vw;
+		width: 100vh;
+		transform: rotate(90deg);
+	}
+}

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./main.js" type="text/javascript" charset="utf-8" async defer></script>
+
+</head>
+<body>
+	
+	<div id="game">
+		<div id="mainMenu">
+			<div id="configWindow">
+				<div id="closeConfigurationWindow" class="closeButton">X</div>
+				<button id="musicControll">Music</button>
+				<button id="soundControll">Sound</button>
+			</div>
+			<button id="playButton"><span>P</span><span>l</span><span>a</span><span>y</span></button>
+			<button id="configurationsButton"><img src="files/images/gear.png" alt="config_icon" style="color: red"></button>
+			<video id="mainMenuVideo" src="files/videos/Main_menu_background.mp4" autoplay muted></video>
+
+		</div>
+		<div id="selectGameModeMenu">
+			<div id="nameWindow">
+				<p>Enter user name (at least 4 characters)</p>
+				<input class="nameInput" type="text">
+				<button class="acceptNameButton">Confirm</button>
+			</div>
+
+			<button id="backToMainMenuButton"><</button>
+			<div id="openPlayerInfoWindow">
+				<div class="playerIconFrame">
+					<img class="playerIcon" src="files/images/user_icon.png" alt="User_Icon">
+					<p class="playerName">Name</p>
+				</div>
+			</div>
+
+			<div id="playerInfoWindow">
+				<div id="closePlayerInfoWindow" class="closeButton">X</div>
+				
+				<div class="playerInfoFrame">
+					<div class="playerIconFrame">
+						<img class="playerIcon" src="files/images/user_icon.png" alt="User_Icon">
+						<p class="playerName">Name</p>
+					</div>
+					<div id="playerLevelIndicator">
+						<div id="playerLevelIndicatorFill"></div>
+						<p class="playerEXPoints"><span id="playerEXPointsIndicator">0/0</span> EXP</p>
+					<!--<p id="playerLevelCount">0</p>!-->
+					</div>
+					<p class="playerLevelCount">
+						<span class="count">0</span>
+						<span>lvl</span>
+					</p>
+				</div>
+				<div id="achievementViewer">
+					<div id="closeAchievementViewer" class="closeButton">X</div>
+					<img class="achievementIcon" src="ff" alt="">
+					<p class="achievementTitle">Title</p>
+					<p class="achievementTarget">100</p>
+					<div class="achievementCompletionIndicator">
+						<div class="achievementCompletionIndicatorFill"></div>
+					</div>
+					<p class="achievementCompletionIndicatorText">20/100</p>
+				</div>
+
+				<p id="achievementsTitle">Achievemens</p>
+				<div id="playerAchievements">
+					<div class="achievement" achievementName="destroyShips" target="10" targetTitle="Destroy ships: " grayImageSrc="" colorfulImageSrc=""></div>
+					<div class="achievement" achievementName="destroyShips" target="100" targetTitle="Destroy ships: "></div>
+					<div class="achievement" achievementName="destroyShips" target="500" targetTitle="Destroy ships: "></div>
+					<div class="achievement" achievementName="destroyShips" target="5000" targetTitle="Destroy ships: "></div>
+					<div class="achievement" achievementName="destroyShips" target="10000" targetTitle="Destroy ships: "></div>
+
+					<div class="achievement" achievementName="useWeapon" target="5" targetTitle="Use weapon: "></div>
+					<div class="achievement" achievementName="useWeapon" target="20" targetTitle="Use weapon: "></div>
+					<div class="achievement" achievementName="useWeapon" target="1000" targetTitle="Use weapon: "></div>
+					<div class="achievement" achievementName="useWeapon" target="5000" targetTitle="Use weapon: "></div>
+					<div class="achievement" achievementName="useWeapon" target="20000" targetTitle="Use weapon: "></div>
+
+					<div class="achievement" achievementName="earnMoney" target="5000" targetTitle="Earn money: "></div>
+					<div class="achievement" achievementName="earnMoney" target="50000" targetTitle="Earn money: "></div>
+					<div class="achievement" achievementName="earnMoney" target="100000" targetTitle="Earn money: "></div>
+					<div class="achievement" achievementName="earnMoney" target="5000000" targetTitle="Earn money: "></div>
+					<div class="achievement" achievementName="earnMoney" target="10000000" targetTitle="Earn money: "></div>
+
+					<div class="achievement" achievementName="spendMoney" target="200" targetTitle="Spend money: "></div>
+					<div class="achievement" achievementName="spendMoney" target="1000" targetTitle="Spend money: "></div>
+					<div class="achievement" achievementName="spendMoney" target="500000" targetTitle="Spend money: "></div>
+					<div class="achievement" achievementName="spendMoney" target="2000000" targetTitle="Spend money: "></div>
+					<div class="achievement" achievementName="spendMoney" target="50000000" targetTitle="Spend money: "></div>
+
+					<div class="achievement" achievementName="winGames" target="10" targetTitle="Win games: "></div>
+					<div class="achievement" achievementName="winGames" target="100" targetTitle="Win games: "></div>
+					<div class="achievement" achievementName="winGames" target="5000" targetTitle="Win games: "></div>
+					<div class="achievement" achievementName="winGames" target="1" targetTitle="Win games: "></div>
+					<div class="achievement" achievementName="winGames" target="20000" targetTitle="Win games: "></div>
+				</div>
+			</div>
+
+			<video id="selectGameModeBackgroundVideo" src="files/videos/select_game_mode_background_video.mp4"></video>
+			<button id="playerVsComputer">Player VS Computer</button>
+			<button id="playerVsPlayer">Player VS Player</button>
+			<button id="selectGameMode">Select</button>
+		</div>
+
+		<audio id="mainMusicPlayer" src="files/sounds/main_music.mp3" id="mainMusicPlayer"></audio>
+		<audio id="soundPlayer" src="files/sounds/shot_sound.mp3"></audio>
+		
+		
+
+		<div id="gameFields">
+			<div id="newAchievementNotification"></div>
+			<div id="weaponSelectField">
+				<p id="closeWeaponSelectField" class="closeButton">X</p>
+				<div class="weaponToSelectContainer">
+					<div class="linearAttack"> Line attack<br><span class="amount"></span>/3</div>
+					<div class="squareAttack">Square attack 3x3<br><span class="amount"></span>/3</div>
+					<div class="nuclearBomb">Nuclear Bomb<br><span class="amount"></span>/1</div>
+				</div>
+				<div id="selectShotPoint">
+					<input id="weaponShotPointInput" type="number" min="1" max="100">
+					<button id="acceptWeaponShotPointButton">Attack</button>
+				</div>
+				<button id="leaveGameButton">Leave</button>
+			</div>
+
+			<div id="leavingConfirmWindow">
+				<button id="confirmLeaving">Leave</button>
+				<button id="rejectLeaving">Resume game</button>
+			</div>
+
+			<div id="firstPlayerField">
+					<div><button id="openWeaponSelectField">---<br>---<br>---</button></div>
+					<div>1</div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>6</div>
+					<div>7</div>
+					<div>8</div>
+					<div>9</div>
+					<div>10</div>
+
+				<div>A</div>
+				<div number="1" class="cell" beginningOfRow="true"></div>
+				<div number="2" class="cell"></div>
+				<div number="3" class="cell"></div>
+				<div number="4" class="cell"></div>
+				<div number="5" class="cell"></div>
+				<div number="6" class="cell"></div>
+				<div number="7" class="cell"></div>
+				<div number="8" class="cell"></div>
+				<div number="9" class="cell"></div>
+				<div number="10" class="cell" endOfRow="true"></div>
+				<div>B</div>
+				<div number="11" class="cell" beginningOfRow="true"></div>
+				<div number="12" class="cell"></div>
+				<div number="13" class="cell"></div>
+				<div number="14" class="cell"></div>
+				<div number="15" class="cell"></div>
+				<div number="16" class="cell"></div>
+				<div number="17" class="cell"></div>
+				<div number="18" class="cell"></div>
+				<div number="19" class="cell"></div>
+				<div number="20" class="cell" endOfRow="true"></div>
+				<div>C</div>
+				<div number="21" class="cell" beginningOfRow="true"></div>
+				<div number="22" class="cell"></div>
+				<div number="23" class="cell"></div>
+				<div number="24" class="cell"></div>
+				<div number="25" class="cell"></div>
+				<div number="26" class="cell"></div>
+				<div number="27" class="cell"></div>
+				<div number="28" class="cell"></div>
+				<div number="29" class="cell"></div>
+				<div number="30" class="cell" endOfRow="true"></div>
+				<div>D</div>
+				<div number="31" class="cell" beginningOfRow="true"></div>
+				<div number="32" class="cell"></div>
+				<div number="33" class="cell"></div>
+				<div number="34" class="cell"></div>
+				<div number="35" class="cell"></div>
+				<div number="36" class="cell"></div>
+				<div number="37" class="cell"></div>
+				<div number="38" class="cell"></div>
+				<div number="39" class="cell"></div>
+				<div number="40" class="cell" endOfRow="true"></div>
+				<div>E</div>
+				<div number="41" class="cell" beginningOfRow="true"></div>
+				<div number="42" class="cell"></div>
+				<div number="43" class="cell"></div>
+				<div number="44" class="cell"></div>
+				<div number="45" class="cell"></div>
+				<div number="46" class="cell"></div>
+				<div number="47" class="cell"></div>
+				<div number="48" class="cell"></div>
+				<div number="49" class="cell"></div>
+				<div number="50" class="cell" endOfRow="true"></div>
+				<div>F</div>
+				<div number="51" class="cell" beginningOfRow="true"></div>
+				<div number="52" class="cell"></div>
+				<div number="53" class="cell"></div>
+				<div number="54" class="cell"></div>
+				<div number="55" class="cell"></div>
+				<div number="56" class="cell"></div>
+				<div number="57" class="cell"></div>
+				<div number="58" class="cell"></div>
+				<div number="59" class="cell"></div>
+				<div number="60" class="cell" endOfRow="true"></div>
+				<div>G</div>
+				<div number="61" class="cell" beginningOfRow="true"></div>
+				<div number="62" class="cell"></div>
+				<div number="63" class="cell"></div>
+				<div number="64" class="cell"></div>
+				<div number="65" class="cell"></div>
+				<div number="66" class="cell"></div>
+				<div number="67" class="cell"></div>
+				<div number="68" class="cell"></div>
+				<div number="69" class="cell"></div>
+				<div number="70" class="cell" endOfRow="true"></div>
+				<div>H</div>
+				<div number="71" class="cell" beginningOfRow="true"></div>
+				<div number="72" class="cell"></div>
+				<div number="73" class="cell"></div>
+				<div number="74" class="cell"></div>
+				<div number="75" class="cell"></div>
+				<div number="76" class="cell"></div>
+				<div number="77" class="cell"></div>
+				<div number="78" class="cell"></div>
+				<div number="79" class="cell"></div>
+				<div number="80" class="cell" endOfRow="true"></div>
+				<div>I</div>
+				<div number="81" class="cell" beginningOfRow="true"></div>
+				<div number="82" class="cell"></div>
+				<div number="83" class="cell"></div>
+				<div number="84" class="cell"></div>
+				<div number="85" class="cell"></div>
+				<div number="86" class="cell"></div>
+				<div number="87" class="cell"></div>
+				<div number="88" class="cell"></div>
+				<div number="89" class="cell"></div>
+				<div number="90" class="cell" endOfRow="true"></div>
+				<div>J</div>
+				<div number="91" class="cell" beginningOfRow="true"></div>
+				<div number="92" class="cell"></div>
+				<div number="93" class="cell"></div>
+				<div number="94" class="cell"></div>
+				<div number="95" class="cell"></div>
+				<div number="96" class="cell"></div>
+				<div number="97" class="cell"></div>
+				<div number="98" class="cell"></div>
+				<div number="99" class="cell"></div>
+				<div number="100" class="cell" endOfRow="true"></div>
+			</div>
+
+			<div id="secondPlayerField">
+					<div></div>
+					<div>1</div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>6</div>
+					<div>7</div>
+					<div>8</div>
+					<div>9</div>
+					<div>10</div>
+
+				<div>A</div>
+				<div number="1" class="cell" beginningOfRow="true"></div>
+				<div number="2" class="cell"></div>
+				<div number="3" class="cell"></div>
+				<div number="4" class="cell"></div>
+				<div number="5" class="cell"></div>
+				<div number="6" class="cell"></div>
+				<div number="7" class="cell"></div>
+				<div number="8" class="cell"></div>
+				<div number="9" class="cell"></div>
+				<div number="10" class="cell" endOfRow="true"></div>
+				<div>B</div>
+				<div number="11" class="cell" beginningOfRow="true"></div>
+				<div number="12" class="cell"></div>
+				<div number="13" class="cell"></div>
+				<div number="14" class="cell"></div>
+				<div number="15" class="cell"></div>
+				<div number="16" class="cell"></div>
+				<div number="17" class="cell"></div>
+				<div number="18" class="cell"></div>
+				<div number="19" class="cell"></div>
+				<div number="20" class="cell" endOfRow="true"></div>
+				<div>C</div>
+				<div number="21" class="cell" beginningOfRow="true"></div>
+				<div number="22" class="cell"></div>
+				<div number="23" class="cell"></div>
+				<div number="24" class="cell"></div>
+				<div number="25" class="cell"></div>
+				<div number="26" class="cell"></div>
+				<div number="27" class="cell"></div>
+				<div number="28" class="cell"></div>
+				<div number="29" class="cell"></div>
+				<div number="30" class="cell" endOfRow="true"></div>
+				<div>D</div>
+				<div number="31" class="cell" beginningOfRow="true"></div>
+				<div number="32" class="cell"></div>
+				<div number="33" class="cell"></div>
+				<div number="34" class="cell"></div>
+				<div number="35" class="cell"></div>
+				<div number="36" class="cell"></div>
+				<div number="37" class="cell"></div>
+				<div number="38" class="cell"></div>
+				<div number="39" class="cell"></div>
+				<div number="40" class="cell" endOfRow="true"></div>
+				<div>E</div>
+				<div number="41" class="cell" beginningOfRow="true"></div>
+				<div number="42" class="cell"></div>
+				<div number="43" class="cell"></div>
+				<div number="44" class="cell"></div>
+				<div number="45" class="cell"></div>
+				<div number="46" class="cell"></div>
+				<div number="47" class="cell"></div>
+				<div number="48" class="cell"></div>
+				<div number="49" class="cell"></div>
+				<div number="50" class="cell" endOfRow="true"></div>
+				<div>F</div>
+				<div number="51" class="cell" beginningOfRow="true"></div>
+				<div number="52" class="cell"></div>
+				<div number="53" class="cell"></div>
+				<div number="54" class="cell"></div>
+				<div number="55" class="cell"></div>
+				<div number="56" class="cell"></div>
+				<div number="57" class="cell"></div>
+				<div number="58" class="cell"></div>
+				<div number="59" class="cell"></div>
+				<div number="60" class="cell" endOfRow="true"></div>
+				<div>G</div>
+				<div number="61" class="cell" beginningOfRow="true"></div>
+				<div number="62" class="cell"></div>
+				<div number="63" class="cell"></div>
+				<div number="64" class="cell"></div>
+				<div number="65" class="cell"></div>
+				<div number="66" class="cell"></div>
+				<div number="67" class="cell"></div>
+				<div number="68" class="cell"></div>
+				<div number="69" class="cell"></div>
+				<div number="70" class="cell" endOfRow="true"></div>
+				<div>H</div>
+				<div number="71" class="cell" beginningOfRow="true"></div>
+				<div number="72" class="cell"></div>
+				<div number="73" class="cell"></div>
+				<div number="74" class="cell"></div>
+				<div number="75" class="cell"></div>
+				<div number="76" class="cell"></div>
+				<div number="77" class="cell"></div>
+				<div number="78" class="cell"></div>
+				<div number="79" class="cell"></div>
+				<div number="80" class="cell" endOfRow="true"></div>
+				<div>I</div>
+				<div number="81" class="cell" beginningOfRow="true"></div>
+				<div number="82" class="cell"></div>
+				<div number="83" class="cell"></div>
+				<div number="84" class="cell"></div>
+				<div number="85" class="cell"></div>
+				<div number="86" class="cell"></div>
+				<div number="87" class="cell"></div>
+				<div number="88" class="cell"></div>
+				<div number="89" class="cell"></div>
+				<div number="90" class="cell" endOfRow="true"></div>
+				<div>J</div>
+				<div number="91" class="cell" beginningOfRow="true"></div>
+				<div number="92" class="cell"></div>
+				<div number="93" class="cell"></div>
+				<div number="94" class="cell"></div>
+				<div number="95" class="cell"></div>
+				<div number="96" class="cell"></div>
+				<div number="97" class="cell"></div>
+				<div number="98" class="cell"></div>
+				<div number="99" class="cell"></div>
+				<div number="100" class="cell" endOfRow="true"></div>
+			</div>
+
+			<div id="shipPlaceField">
+				<p id="gameDialog">Place Ships</p>
+				<div id="shipsContainer">
+					<div id="fourSectionShip" class="ship" length="4" amountOnTheField="0" limit="2" turned="false">
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+					</div>
+					<div id="threeSectionShip" class="ship" length="3" amountOnTheField="0" limit="3" turned="false">
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+					</div>
+					<div id="twoSectionShip" class="ship" length="2" amountOnTheField="0" limit="4" turned="true">
+						<div class="shipSection"></div>
+						<div class="shipSection"></div>
+					</div>
+				</div>
+				
+				<div class="shipPlaceFieldControllButtons">
+					<button id="rotateShipButton">Rotate</button>
+					<button id="autoPlacingButton">Auto place</button>
+					<button id="openWeaponShop">Shop</button>
+					<button id="passShipPlacingToSecondPlayer">Next</button>
+					<button id="startGameButton">Start game</button>
+				</div>
+
+				<div id="weaponShop">
+					<p id="closeWeaponShop" class="closeButton">X</p>
+					<span id="playerMoney">100euro</span>
+					<div class="weaponShopWeapon">
+						<div class="linearAttack">
+							<span>Line attack</span>
+							<br/>
+							<span>150 &euro;</span>
+							<br/>
+							<span class="amount">0</span>
+							<span>/3</span>
+						</div>
+						
+						<div class="squareAttack">
+							<span>Square attack 3x3</span>
+							<br/>
+							<span>100 &euro;</span>
+							<br/>
+							<span class="amount">0</span>
+							<span>/3</span>
+						</div>
+						
+						<div class="nuclearBomb">
+							<span>Nuclear Bomb</span>
+							<br/>
+							<span>700 &euro;</span>
+							<br/>
+							<span class="amount">0</span>
+							<span>/1</span>
+						</div>	
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="gameEndWindow">
+			<p id="endGameText">This is the end</p>
+			<table id="gameTotals">
+				<tr>
+					<th>Target</th>
+					<th>Money</th>
+				</tr>
+				<tr>
+					<th>Victory: </th>
+					<td id="victoryMoney">500</td>
+				</tr>
+				<tr>
+					<th>Ship sections destroyed: </th>
+					<td id="shipSectionDestroyedMoney">250</td>
+				</tr>
+				<tr>
+					<th>Ship sections lost: </th>
+					<td id="shipSectionsLostMoney"></td>
+				</tr>
+				<tr>
+					<th>Targeting %: </th>
+					<td id="targetingPercentMoney"></td>
+				</tr>
+				<tr>
+					<th>Total: </th>
+					<td id="totalMoney"></td>
+				</tr>
+			</table>
+			<button id="endTheGameButton">Main Menu</button>
+		</div>
+	</div>
+
+</body>
+</html>
