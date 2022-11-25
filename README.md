@@ -16,9 +16,9 @@ undestroyed ship is the winner;
 * CSS
 * JavaScript
 
-#How to run
+# How to run
 Simply drag and drop index.html file in your browser
 
-#For developer
+# For developer
 This game is developed without using canvas, only divs were used. The fields are 10x10 cells, each cell has it's own order number which is used to identify where 
 player placed their ship or where the player has shooted.
