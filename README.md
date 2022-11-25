@@ -3,10 +3,9 @@
 Table of contents: 
 * General info
 * Technologies
-* 
 * How to run
 
-#General info
+# General info
 This is a well-known game game where 2 players fight with each other using ships. There are 2 fields on each field user places their ships, users also can buy weapon 
 for money they earn during fight. Players alternatively shoot each other untill while one of them has got all ships destroyed, a player who is left with at least one 
 undestroyed ship is the winner;
